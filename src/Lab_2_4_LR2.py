@@ -38,7 +38,6 @@ class LinearRegressor:
             )
         if np.ndim(X) == 1:
             X = X.reshape(-1, 1)
-
         X_with_bias = np.insert(
             X, 0, 1, axis=1
         )  # Adding a column of ones for intercept
@@ -63,11 +62,12 @@ class LinearRegressor:
             None: Modifies the model's coefficients and intercept in-place.
         """
         # Replace this code with the code you did in the previous laboratory session
-        print(X)
-        matriz = np.matmul(np.matmul(np.linalg.pinv(np.matmul(np.transpose(X),X)),np.transpose(X)),y)
-        matriz = np.transpose(matriz)
-        self.intercept = matriz[0]
-        self.coefficients = matriz[1:]
+
+        Beta = np.matmul(np.matmul(np.linalg.pinv(np.matmul(np.transpose(X),X)),np.transpose(X)),y)
+        
+        Beta = np.transpose(Beta)
+        self.intercept = Beta[0]
+        self.coefficients = Beta[1:]
 
 
     def fit_gradient_descent(self, X, valores_de_verdad, learning_rate=0.01, iterations=1000):
